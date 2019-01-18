@@ -1,0 +1,1 @@
+valor=int(input("Ingrese"));
