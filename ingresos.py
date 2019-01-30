@@ -83,8 +83,10 @@ combo.place(x=150,y=50)
 combo['values'] = (nombre)
 
 
-etiquetaTi = Label(ventana,text="Descripcion",bg=colorFondo,fg=colorLetra).place(x=50,y=80)
-cajaTi = Entry(ventana,textvariable=descripcion).place(x=150,y=80)
+"""etiquetaDescripcion = Label(ventana, text="Descripción",fg="black",font=("Comic Sans MS",12)).place(x=45,y=80)"""
+"""etiquetaTi = Label(ventana,text="Descripcion",bg=colorFondo,fg=colorLetra).place(x=50,y=80)"""
+cajaDescripcion=Scrollbar(ventana, command=textoComentario.yview)
+cajaDescripcion = Entry(ventana,textvariable=descripcion).place(x=150,y=80)
 
 etiquetaSummary = Label(ventana,text="Fecha",bg=colorFondo,fg=colorLetra).place(x=50,y=110)
 cajaSummary = Entry(ventana,textvariable=fecha).place(x=150,y=110)
