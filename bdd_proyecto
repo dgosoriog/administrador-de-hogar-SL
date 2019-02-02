@@ -24,9 +24,9 @@ CREATE TABLE `categoria` (
 `nombre_categoria` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 --
--- Dumping data for table `genre`
+-- Dumping data for table `categoria`
 --
-INSERT INTO `genre` (`id_categoria`, `nombre_categoria`) VALUES
+INSERT INTO `categoria` (`id_categoria`, `nombre_categoria`) VALUES
 (1, 'Sueldo'),
 (2, 'Ventas'),
 (3, 'Honorarios'),
