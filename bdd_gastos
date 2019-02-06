@@ -41,7 +41,7 @@
 	`id_gastos` int(11) NOT NULL,
 	`id_categoria_g` int(11) NOT NULL,
 	`descripcion_g` varchar(100) NOT NULL,
-	`fecha_g` date NOT NULL,
+	`fecha_g` varchar(20) NOT NULL,
 	`monto_g` int(11) NOT NULL
 	) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 	
