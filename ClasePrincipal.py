@@ -1,61 +1,66 @@
-import tkinter as tk  # python 3
-from tkinter import font as tkfont  # python 3
-import PantallaGastos
-import PantallaIngresos
-import PantallaMenu
-import PantallaReportes
-import PantallaSaldo
+import tkinter as tk
+from tkinter import *
+from tkinter import messagebox
+import pymysql
+class PantallaSaldo(tk.Frame):
+
+    def ver_ingresos(saldo):
+     dbc = ("127.0.0.1", "root", "", "proyecto")
+     db = pymysql.connect(dbc[0], dbc[1], dbc[2], dbc[3])  # abrir una coneccion con mysql
+     cursor = db.cursor()  # obtener el cursor
+     sql2 = "SELECT sum(monto) FROM ingresos"
+     try:
+       cursor.execute(sql2)
+       results = cursor.fetchall()
+       for row in results:
+          t = int(row[0])
+     except:
+       print("Error")
+
+     saldo.totalI.set(t)
+     return saldo.totalI
 
 
-class SampleApp(tk.Tk):
+    def ver_gastos(saldo):
+        dbc = ("127.0.0.1", "root", "", "proyecto")
+        db = pymysql.connect(dbc[0], dbc[1], dbc[2], dbc[3])  # abrir una coneccion con mysql
+        cursor = db.cursor()  # obtener el cursor
+        sql2 = "SELECT sum(monto_g) FROM gastos"
+        try:
+            cursor.execute(sql2)
+            results = cursor.fetchall()
+            for row in results:
+                t = int(row[0])
+        except:
+            print("Error")
+        saldo.totalG.set(t)
+        return saldo.totalG
 
-    def __init__(self, *args, **kwargs):
-     tk.Tk.__init__(self, *args, **kwargs)
+    def calcular(saldo):
+        totalSaldo=saldo.ver_ingresos()-saldo.ver_gastos()
+        return totalSaldo
 
-     self.title_font = tkfont.Font(family='Helvetica', size=10, weight="bold", slant="roman")
-     # the container is where we'll stack a bunch of frames
-     # on top of each other, then the one we want visible
-     # will be raised above the others
-     colorFondo  = "White"
-     container = tk.Frame(self)
-     container.pack(side="top", fill="both", expand=False)
-     container.grid_rowconfigure(0, weight=1)
-     container.grid_columnconfigure(0, weight=1)
-     self.frames = {}
-     for F in (PantallaMenu.PantallaMenu, PantallaIngresos.PantallaIngresos, PantallaGastos.PantallaGastos,PantallaReportes.PantallaReportes,PantallaSaldo.PantallaSaldo):
-      page_name = F.__name__
-      frame = F(parent=container, controller=self)
-      self.frames[page_name] = frame
-
-      # put all of the pages in the same location;
-      # the one on the top of the stacking order
-
-
-      # will be the one that is visible.
-      frame.grid(row=0, column=0, sticky="nsew")
-
-     self.show_frame("PantallaMenu")
-
-    def show_frame(self, page_name):
-     '''Show a frame for the given page name'''
-     frame = self.frames[page_name]
-     frame.tkraise()
-
-
-if __name__ == "__main__":
-        app = SampleApp()
-        app.mainloop()
-
-
-
-
-
-
-
-
-
-
-
-
-
+    def __init__(saldo, parent, controller):
+        tk.Frame.__init__(saldo, parent)
+        saldo.controller = controller
+        label = tk.Label(saldo, text="This is page 1", font=controller.title_font)
+        colorFondo  = "White"
+        colorLetra = "Blue"
+        saldo.config(bd=30)
+        saldo.config(relief="ridge")
+        saldo.config(background=colorFondo)
+        saldo.totalI=StringVar()
+        saldo.totalG=StringVar()
+        saldo.totalSaldo=StringVar()
+        saldo.configure(background=colorFondo)
+        labelIngreso=Label(saldo,text="TOTAL DE INGRESOS:",bg=colorFondo,fg = colorLetra,font=controller.title_font).grid(row=0,column=0,padx=10,pady=10)
+        global txtIngreso
+        global txtGasto
+        txtIngreso=Entry(saldo,text=saldo.totalI,bd=5,relief="sunken",width=25,bg="#FFFF00",fg="Red",font=("Helvetica",11)).grid(row=0,column=1,padx=10,pady=10)
+        labelgasto = Label(saldo,text="TOTAL DE GASTOS: ",bg=colorFondo,fg = colorLetra,font=controller.title_font).grid(row=1,column=0,padx=10,pady=10)
+        txtGasto=Entry(saldo,text=saldo.totalG,bd=5,relief="sunken",width=25,bg="#FFFF00",fg="Red",font=("Helvetica",11)).grid(row=1,column=1,padx=10,pady=10)
+        labelSaldo = Label(saldo,text="SALDO: ",bg=colorFondo,fg = "Red",font=controller.title_font).grid(row=2,column=0,padx=10,pady=10)
+        txtSaldo=Entry(saldo,text=saldo.calcular,bd=5,relief="sunken",width=25,bg="#FFFF00",fg="Red",font=("Helvetica",11)).grid(row=2,column=1,padx=10,pady=10)
+        btnAtras = Button(saldo,text="ATRAS",font=controller.title_font,bd=10,relief="groove",command=lambda: controller.show_frame("PantallaMenu")).grid(row=4,column=0,padx=10,pady=10)
+        btnGuardar = Button(saldo,text="GUARDAR",font=controller.title_font,bd=10,relief="groove").grid(row=4,column=1,padx=10,pady=10)
 
