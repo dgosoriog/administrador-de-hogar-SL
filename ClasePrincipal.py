@@ -12,8 +12,7 @@ class SampleApp(tk.Tk):
     def __init__(self, *args, **kwargs):
      tk.Tk.__init__(self, *args, **kwargs)
 
-     self.title_font = tkfont.Font(family='Helvetica', size=18, weight="bold", slant="italic")
-
+     self.title_font = tkfont.Font(family='Helvetica', size=10, weight="bold", slant="roman")
      # the container is where we'll stack a bunch of frames
      # on top of each other, then the one we want visible
      # will be raised above the others
@@ -46,6 +45,12 @@ class SampleApp(tk.Tk):
 if __name__ == "__main__":
         app = SampleApp()
         app.mainloop()
+
+
+
+
+
+
 
 
 
