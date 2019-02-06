@@ -13,7 +13,7 @@
 	/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 	/*!40101 SET NAMES utf8mb4 */;
 	--
-	-- Database: `proyecto`
+	-- Database: `proyecto1`
 	--
 	-- --------------------------------------------------------
 	--
@@ -26,7 +26,7 @@
 	--
 	-- Dumping data for table `categoria_gasto`
 	--
-	INSERT INTO `categoria_gasto` (`id_categoria`, `nombre_categoria`) VALUES
+	INSERT INTO `categoria_gasto` (`id_categoria_g`, `nombre_categoria_g`) VALUES
 	(1, 'Estacionamiento'),
 	(2, 'Servicio de Internet'),
 	(3, 'Bares y Antros'),
@@ -52,37 +52,36 @@
 	--
 	-- Indexes for table `categoria_gasto`
 	--
-	ALTER TABLE `categoria`
-	ADD PRIMARY KEY (`id_categoria`);
+	ALTER TABLE `categoria_gasto`
+	ADD PRIMARY KEY (`id_categoria_g`);
 	--
-	-- Indexes for table `ingresos`
+	-- Indexes for table `gastos`
 	--
-	ALTER TABLE `ingresos`
-	ADD PRIMARY KEY (`id_ingreso`),
-	ADD KEY `cat_ingreso_fk` (`id_categoria`);
+	ALTER TABLE `gastos`
+	ADD PRIMARY KEY (`id_gastos`),
+	ADD KEY `cat_gasto_fk` (`id_categoria_g`);
 	--
 	-- AUTO_INCREMENT for dumped tables
 	--
 	--
-	-- AUTO_INCREMENT for table `categoria`
+	-- AUTO_INCREMENT for table `categoria_gasto`
 	--
-	ALTER TABLE `categoria`
-	MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+	ALTER TABLE `categoria_gasto`
+	MODIFY `id_categoria_g` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 	--
-	-- AUTO_INCREMENT for table `ingresos`
+	-- AUTO_INCREMENT for table `gastos`
 	--
-	ALTER TABLE `ingresos`
-	MODIFY `id_ingreso` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=176;
+	ALTER TABLE `gastos`
+	MODIFY `id_gastos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=176;
 	--
 	-- Constraints for dumped tables
 	--
 	--
-	-- Constraints for table `ingresos`
+	-- Constraints for table `gastos`
 	--
-	ALTER TABLE `ingresos`
-	ADD CONSTRAINT ` cat_ingreso_fk` FOREIGN KEY (`id_categoria`) REFERENCES 
-	`categoria` (`id_categoria`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+	ALTER TABLE `gastos`
+	ADD CONSTRAINT ` cat_gasto_fk` FOREIGN KEY (`id_categoria_g`) REFERENCES 
+	`categoria_gasto` (`id_categoria_g`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 	/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 	/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 	/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-
